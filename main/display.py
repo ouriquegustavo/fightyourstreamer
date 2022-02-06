@@ -1,5 +1,8 @@
 import pygame
 
+def sort_zorder(v):
+    return hasattr(v, 'zorder') and v.zorder or -9999
+
 class Display:
     def __init__(self, game, width, height):
         self.game = game
@@ -18,7 +21,14 @@ class Display:
     def update(self):
         self.display.fill((0,0,255))
         
-        keys = list(self.game.entity_manager.entities)
+        keys = [
+            v.gid for v in 
+            sorted(
+                self.game.entity_manager.entities.values(),
+                key = sort_zorder
+            )
+        ]
+        
         for k in keys:
             ent = self.game.entity_manager.entities[k]
             if hasattr(ent, 'is_drawing') and ent.is_drawing:

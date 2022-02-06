@@ -8,21 +8,21 @@ class EntityManager:
         self.max_entities = 65536
         
     def gen_id(self):
-        id_ = random.randint(0,self.max_entities)
-        while id_ in self.entities:
-            id_ = random.randint(0,self.max_entities)
-        return id_
+        gid = random.randint(0,self.max_entities)
+        while gid in self.entities:
+            gid = random.randint(0,self.max_entities)
+        return gid
         
     def create_entity(self, obj, *args, **kwargs):
-        id_ = self.gen_id()
+        gid = self.gen_id()
         if isinstance(obj, str):
             obj = ents.from_to.get(obj)
-        ent = obj(self.game, id_, *args, **kwargs)
-        self.entities[id_] = ent
-        return ent
+        ent = obj(self.game, gid, *args, **kwargs)
+        self.entities[gid] = ent
+        return gid
     
-    def delete_entity(self, id_, *args, **kwargs):
-        ent = self.entities.pop(id_)
+    def delete_entity(self, gid, *args, **kwargs):
+        ent = self.entities.pop(gid)
         if hasattr(ent, 'on_delete') and ent.on_delete:
             ent.on_delete(*args, **kwargs)
             

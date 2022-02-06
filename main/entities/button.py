@@ -1,15 +1,18 @@
 import pygame
 
 class Button:
-    def __init__(self, game, id_, x, y, dx, dy):
+    def __init__(self, game, gid, x, y, dx, dy):
+        self.kind = 'button'
         self.game = game
-        self.id_ = id_
+        self.gid = gid
         self.x = x
         self.y = y
         self.dx = dx
         self.dy = dy
         
-        self.sprite = pygame.Surface((dx,dy))
+        self.zorder = 0
+        
+        self.sprite = pygame.Surface((self.dx, self.dy))
         self.sprite.fill((255,0,0,255))
         
         self.is_updating = True
