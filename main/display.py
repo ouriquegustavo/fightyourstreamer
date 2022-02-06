@@ -5,6 +5,7 @@ class Display:
         self.game = game
         self.h = height
         self.w = width
+        self.start()
         
     def start(self):
         self.display = pygame.display.set_mode(
@@ -16,5 +17,11 @@ class Display:
         
     def update(self):
         self.display.fill((0,0,255))
+        
+        keys = list(self.game.entity_manager.entities)
+        for k in keys:
+            ent = self.game.entity_manager.entities[k]
+            if hasattr(ent, 'is_drawing') and ent.is_drawing:
+                ent.draw()
 
         pygame.display.flip()

@@ -1,5 +1,7 @@
 from main.display import Display
 from main.clock import Clock
+from main.entity_manager import EntityManager
+from main.entities import Button
 
 class Game:
     def __init__(self):
@@ -10,8 +12,9 @@ class Game:
     def run(self):
         self.clock = Clock(self, self.tps)
         self.display = Display(self, self.width, self.height)
+        self.entity_manager = EntityManager(self)
         
-        self.display.start()
+        self.entity_manager.create_entity('button', 100, 100, 10, 10)
         
         while True:
             self.clock.tick()
