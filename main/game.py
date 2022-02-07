@@ -4,6 +4,8 @@ from main.clock import Clock
 from main.entity_manager import EntityManager
 from main.viewers import Viewers
 from main.camera import Camera
+from main.controls import Controls
+from main.font import Font
 
 class Game:
     def __init__(self):
@@ -18,9 +20,16 @@ class Game:
         self.display = Display(self, self.width, self.height)
         self.entity_manager = EntityManager(self)
         self.camera = Camera(self)
+        self.controls = Controls(self)
         self.viewers = Viewers(self)
+        self.font = Font(self)
         
-        self.entity_manager.create_entity('collider', 0, -768/2, 30, 768/2)
+        self.entity_manager.create_entity('wall', -1366/2, -1366/2+30, -768/2, 768/2)
+        self.entity_manager.create_entity('wall', 1366/2-30, 1366/2, -768/2, 768/2)
+        self.entity_manager.create_entity('wall', -1366/2, 1366/2, -768/2, -768/2+30)
+        self.entity_manager.create_entity('wall', -1366/2, 1366/2, 768/2-30, 768/2)
+        
+        self.entity_manager.create_entity('player', -300, 0)
         
         self.viewers.start()
         
@@ -36,7 +45,10 @@ class Game:
                     self.is_running = False
             
             for k, v in self.viewers.clicks.items():
-                self.entity_manager.create_entity('e_warrior', v['x'], v['y'])
+                self.entity_manager.create_entity('warrior', v['x'], v['y'])
             self.viewers.clicks.clear()
+            
+            self.controls.get_keys()
+            
             self.entity_manager.update()
             self.display.update()

@@ -1,9 +1,13 @@
-from .button import Button
-from .e_warrior import EWarrior
-from .collider import Collider
+from main.entities.button import Button
+from main.entities.warrior import Warrior
+from main.entities.wall import Wall
+from main.entities.player import Player
+from main.entities.projectile import Projectile
 
 from_to = {
     'button':Button,
-    'e_warrior': EWarrior,
-    'collider': Collider
+    'warrior': Warrior,
+    'wall': Wall,
+    'player': Player,
+    'projectile': Projectile,
 }

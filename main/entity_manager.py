@@ -29,10 +29,15 @@ class EntityManager:
             
     def update(self):
         keys = list(self.entities.keys())
+        for k in keys:       
+            ent = self.entities[k] 
+            if hasattr(ent, 'should_delete') and ent.should_delete:
+                self.delete_entity(k)
+        
+        keys = list(self.entities.keys())
         for k in keys:
             ent = self.entities[k]
             if hasattr(ent, 'is_updating') and ent.is_updating:
                 ent.update()
                 
-            if hasattr(ent, 'should_delete') and ent.should_delete:
-                self.delete_entity(ent)
+

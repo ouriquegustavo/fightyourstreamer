@@ -1,10 +1,10 @@
+from main.entities.entity import Entity
 import pygame
 
 class Button:
     def __init__(self, game, gid, x, y, dx, dy):
+        super().__init__(game, gid)
         self.kind = 'button'
-        self.game = game
-        self.gid = gid
         self.x = x
         self.y = y
         self.dx = dx

@@ -26,7 +26,6 @@ class Viewers:
         clock = pygame.time.Clock()
         while self.is_running:
             clock.tick(10)
-            #pygame.event.pump()
             pressed = pygame.mouse.get_pressed()
             if pressed[0]:
                 tid = 'gleenus'
