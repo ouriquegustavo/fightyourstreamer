@@ -5,7 +5,7 @@ from main.entities.player import Player
 from main.entities.projectile import Projectile
 
 from_to = {
-    'button':Button,
+    'button': Button,
     'warrior': Warrior,
     'wall': Wall,
     'player': Player,
